@@ -1,0 +1,25 @@
+{
+  "name": "abraovic/php-paginator",
+  "type": "library",
+  "description": "Simple PHP paginator for Symfony2.8+",
+  "homepage": "https://github.com/abraovic/php-paginator",
+  "license": "Apache-2.0",
+  "keywords": ["paginate", "php"],
+  "authors": [
+    {
+      "name": "Ante Braovic",
+      "email": "abraovic@gmail.com",
+      "homepage": "http://antebraovic.me"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/abraovic/php-paginator/issues",
+    "source": "https://github.com/abraovic/php-paginator"
+  },
+  "require": {
+    "php": ">=5.3"
+  },
+  "autoload": {
+    "psr-4": {"abraovic\\phpPaginator\\": "src/"}
+  }
+}

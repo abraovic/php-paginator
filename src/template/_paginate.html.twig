@@ -1,0 +1,48 @@
+{% if app.request.query.all|url_encode is empty %}
+    {% set query = '' %}
+{% else %}
+    {% set query = '?' ~ app.request.query.all|url_encode %}
+{% endif %}
+
+<ul class="pagination">
+    {% if pagination.active > 1 %}
+        <li>
+            <a href="{{ pagination.link }}/1{{ query }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    {% endif %}
+
+    <li class="paginate_button {% if (pagination.active == 1) %}active{% endif %}"><a href="{{ pagination.link }}/1{{ query }}">1</a></li>
+    {% if (pagination.active > 3 and pagination.limit > 5) %}
+        <li class="paginate_button"><a href="">...</a></li>
+    {% endif %}
+
+    {% for i in 1..pagination.loopLimit %}
+        {% if (pagination.active > 3 and pagination.active < pagination.limit-2) %}
+            <li class="paginate_button {% if (pagination.active == pagination.active+i-2) %}active{% endif %}"><a href="{{ pagination.link }}/{{ pagination.active+i-2 }}{{ query }}">{{ pagination.active+i-2 }}</a></li>
+        {% elseif (pagination.active <= 3) %}
+            {% if (i > 1) %}
+                <li class="paginate_button {% if (pagination.active == i) %}active{% endif %}"><a href="{{ pagination.link }}/{{ i }}{{ query }}">{{ i }}</a></li>
+            {% endif %}
+        {% else %}
+            {% if (pagination.limit-pagination.loopLimit+i < pagination.limit) %}
+                <li class="paginate_button {% if (pagination.active == pagination.limit-pagination.loopLimit+i) %}active{% endif %}"><a href="{{ pagination.link }}/{{ pagination.limit-pagination.loopLimit+i }}{{ query }}">{{ pagination.limit-pagination.loopLimit+i }}</a></li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if (pagination.active < pagination.limit-2 and pagination.limit > 5) %}
+        <li class="paginate_button"><a href="">...</a></li>
+    {% endif %}
+    {% if (pagination.limit > 1) %}
+        <li class="paginate_button {% if (pagination.active == pagination.limit) %}active{% endif %}"><a href="{{ pagination.link }}/{{ pagination.limit }}{{ query }}">{{ pagination.limit }}</a></li>
+    {% endif %}
+    {% if pagination.active < pagination.limit %}
+        <li>
+            <a href="{{ pagination.link }}/{{ pagination.limit }}{{ query }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    {% endif %}
+</ul>
