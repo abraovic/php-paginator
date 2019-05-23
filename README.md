@@ -21,7 +21,7 @@ twig:
 
 In your controller:
 ```php
-use abraovic\phpPaginator\Paginator;
+use abraovic\phpPaginator\Paginate;
 
 class ... {
     function ... {
@@ -29,11 +29,11 @@ class ... {
                     'some.html.twig',
                     [
                         ...,
-                        'pagination' => Paginator::data(
+                        'pagination' => Paginate::data(
                             $page, // current page
                             $limit, // max limit per page
                             $total, // total number of items
-                            $this->get('router')->generate('_route_name', array(), true) // route link
+                            $this->get('router')->generate('_route_name', array(), true) // route link - replace _route_name with proper name
                         )
                     ]
                 );
@@ -44,6 +44,12 @@ class ... {
 In your twig:
 ```php
 {{ include('@abraovic_paginate/_paginate.html.twig') }}
+```
+
+If there is a [translation bundle] installed you can translate First and Last labels by adding the keys in your app's messages.yaml like this:
+```php
+First: [first in some other language]
+Last: [last in some other language]
 ```
 
 ## Contributing
@@ -57,3 +63,4 @@ The abraovic/php-paginator library is copyright © [Ante Braovic](http://antebra
 [packagist]: https://packagist.org/packages/abraovic/php-paginator
 [composer]: http://getcomposer.org/
 [contributing]: https://github.com/abraovic/php-paginator/blob/master/CONTRIBUTORS.md
+[translation bundle]: https://symfony.com/doc/current/translation.html

@@ -3,7 +3,7 @@
   "type": "library",
   "description": "Simple PHP paginator for Symfony2.8+",
   "homepage": "https://github.com/abraovic/php-paginator",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "keywords": ["paginate", "php"],
   "authors": [
     {
